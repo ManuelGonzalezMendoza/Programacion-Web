@@ -20,7 +20,7 @@
 
 ---
 
-# Tambien algunas musicas que me gustan son:
+# Algunas de las musicas que me gustan son:
 
 - Take on me
 - Bad Boys
