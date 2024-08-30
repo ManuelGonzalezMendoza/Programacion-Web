@@ -28,8 +28,18 @@
 
 ---
 
-# Esta es mi cita favorita:
+# Esta son mis cita favoritas:
 
 > "La mejor manera de predecir el futuro es inventarlo."
-
+>
 >Alan Kay
+
+
+>"La innovación es lo que distingue a un líder de los demás."
+>
+>  Steve Jobs
+
+
+> "La Web no está terminada porque está diseñada para evolucionar constantemente."
+> 
+> — Tim Berners-Lee
