@@ -10,7 +10,7 @@
 **Un lenguaje de programacion que ya domino seria C#**
 
 
-**Algunas de mis series favortias son:**
+# Algunas de mis series favortias son:
  
 - Breaking bad
 - Better call saul
@@ -18,11 +18,15 @@
 - Vikingos
 - Lucifer 
 
-**Tambien algunas musicas que me gustan son:**
+---
+
+# Tambien algunas musicas que me gustan son:
 
 - Take on me
 - Bad Boys
 - Thunderstruck 
 
+---
 
+> 
 
