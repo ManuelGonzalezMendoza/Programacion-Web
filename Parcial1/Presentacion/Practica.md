@@ -20,13 +20,16 @@
 
 ---
 
-# Algunas de las musicas que me gustan son:
+# Algunas de las peliculas que me gustan son:
 
-- Take on me
-- Bad Boys
+- Kingsman
+- Volver al futuro
 - Thunderstruck 
 
 ---
 
-> 
+# Esta es mi cita favorita:
 
+> "La mejor manera de predecir el futuro es inventarlo."
+
+>Alan Kay
