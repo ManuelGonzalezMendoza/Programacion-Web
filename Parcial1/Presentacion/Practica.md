@@ -4,7 +4,7 @@
 | Categoria  |Descripcion         | 
 |------------|--------------------|
 | **Nombre** | Manuel De jesus    | 
-| **Edad**   |   19               | 
+| **Edad**   |   20               | 
 | **Ciudad** |   Nuevo Laredo     | 
 
 **Un lenguaje de programacion que ya domino seria C#**
