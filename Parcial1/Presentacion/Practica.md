@@ -7,7 +7,12 @@
 | **Edad**   |   20               | 
 | **Ciudad** |   Nuevo Laredo     | 
 
-**Un lenguaje de programacion que ya domino seria C#**
+# Lenguaje que domino:
+
+**Es C#**
+
+![C#](https://cdn2.fptshop.com.vn/unsafe/640x0/filters:quality(100)/2024_2_16_638436812296210622_c-la-gi-8.jpg)
+---
 
 
 # Algunas de mis series favortias son:
@@ -20,11 +25,11 @@
 
 ---
 
-# Algunas de las peliculas que me gustan son:
+# Algunas mis peliculas que me gustan son:
 
 - Kingsman
 - Volver al futuro
-- Thunderstruck 
+- Sin novedad al frente 
 
 ---
 
