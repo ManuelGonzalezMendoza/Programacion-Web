@@ -8,7 +8,8 @@
 <style> 
     .Caja
     {
-         float: left;
+        
+          float: left   ;
            width: 200px;
            height: 200px ;
            background-color: aqua  ;
@@ -17,20 +18,25 @@
     
     }
     #Caja2{
-          clear: left;
-    }
-    #Caja3{
-          clear: left;
+          clear: right;
+    }#Caja3{
+          clear: right;
     }
     #Caja4{
-          clear: left;
+          clear: right;
     }
-    #Caja5{
-          clear: left;
-    }
+
+
+
+    .contenedor
+{
+    background-color: yellow;
+    overflow: auto;
+}
 
 </style>
 <body>
+      <div class="contenedor"></div>
     <div class="Caja" id="Caja1">Caja 1</div>
     <div class="Caja" id="Caja2">Caja 2</div>
     <div class="Caja" id="Caja3">Caja 3</div>
