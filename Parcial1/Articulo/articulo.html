@@ -7,8 +7,14 @@
 
     <style>
       h1 {
-         margin-bottom: 20px;
+        margin-bottom: 20px;
+        text-align: center;
          }
+
+         h2 {
+        margin-bottom: 20px;
+         }
+
        p {
           margin-bottom: 20px; /* Margen inferior de 20px entre párrafos */
          }
@@ -22,17 +28,26 @@
             padding: 0;
         }
 
+        #Imagen1 {
+
+    width: 250px; /* Tamaño de la primera imagen */
+    height: 10px auto;
+    border-radius: 20px; /* Bordes redondeados */
+        }
+
         #Contenedor{
-        background-color: aqua;
+        background-color: burlywood;
         width: 65%;
        margin: auto;
         font-family: Arial, Helvetica, sans-serif;
-        line-height: 2em; 
+        line-height: 1.5em; 
        padding: 50px;
-        min-height: 170vh
+        min-height: 175vh
          
        
         }
+       
+
       
         #Contenedor2{
          
@@ -43,7 +58,7 @@
       
       background-position: center; 
        
-            min-height: 170vh
+            min-height: 229vh
         } 
 
         #Contenedor3{
@@ -55,16 +70,27 @@
       
         background-position: center; 
          
-            min-height: 170vh
+            min-height: 229vh
         } 
               
                                                   
         
         img{
-          display: block;
-           margin:0 auto;
+           
+            display: block;
+           margin: 20px auto;
             width: 300px;
             height: 300px;
+        }
+
+
+        article {
+            background-color: antiquewhite;
+            padding: 10px;
+            border-radius: 15px;
+            margin: 20px auto;
+            width: 50%;
+            
         }
     
        
@@ -91,7 +117,13 @@
      <p>Los ordenadores Macintosh de Apple se convirtieron así en el estándar del diseño gráfico y las productoras de software como Adobe entraron en el juego incorporando maravillas como la tecnología PDF o ingenios tan asombrosos como Photoshop 1.0.</p>
      <p>Desde este momento, los pinceles y las temperas fueron amablemente devueltos a sus genuinos propietarios, los pintores, y el diseñador gráfico, maravillado ante las nuevas posibilidades que se mostraban, mordió la “manzana” sin pensarlo dos veces.</p>
     
-   
+     <article>
+        <h2>Tipografía Avant Garde</h2>
+        <p>Dentro de las creatividades logradas en el diseño gráfico se encuentran las tipografías. La famosa fuente Avant Garde fue creada por el diseñador gráfico Herbert Lubalin. Se especializó en la identidad editorial y también fue reconocido por desempeñarse en el diseño de imagen de la revista Eros.
+
+            Después de crear la famosa tipografía Avant Garde, diseñó las fuentes ITC Serif Gothic, LSC Condensed y Ronda. Seguramente has usado una de ellas alguna vez.</p>
+        <img  id= "Imagen1" src=https://blog.hubspot.es/hubfs/media/introduccionaldisenograficoejemplotipografiaavantgarde.jpeg alt="">
+    </article>
     
   </body>
 </html>
