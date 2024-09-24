@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Grid</title>  
+<style>     
+    .grid-container {
+        display: grid;
+        grid-template-columns: 34% 34% 34%;
+        grid-template-rows: 35% 35% 35%;
+        width: 97vw;
+        height: 94vh;
+        grid-template-areas: 
+            "enca  barra conte"
+            "enca  barra conte"
+            "piepag piepag piepag";
+    }
+    #Contenedor1 {
+        grid-area:enca; 
+        background-color: aqua;
+    }
+    #Contenedor2 {
+        grid-area:barra;  
+        background-color: lightblue;
+    }
+    #Contenedor3 {
+        grid-area:conte;   
+        background-color: lightgreen;
+    }
+    #Contenedor4 {
+        grid-area:piepag;  
+        background-color: red;
+        display: flex; /* Usamos flexbox para organizar las cajas */
+        justify-content: space-around; /* Espacio alrededor de las cajas */
+        align-items: center; /* Alinear verticalmente en el centro */
+    }
+    .cajaFloat {
+        border: 1px solid blue; /* Borde para visualización */
+        height: 100%; /* Altura fija para las cajas */
+        width: 30%; /* Ancho relativo al contenedor */
+        justify-content: center; /* Centrar imagen horizontalmente */
+        align-items: center;
+    }
+    img {
+        width: 100%; /* La imagen ocupará todo el ancho de la caja */
+        height: 100%; /* La imagen ocupará todo el alto de la caja */
+        object-fit: cover; /* La imagen cubrirá completamente la caja sin espacio adicional */
+    }      
+
+    .cajaFlex {
+        display: flex;          
+        justify-content: center; /* Centra horizontalmente */
+        align-items: center; /* Centra verticalmente */
+        border: 1px solid yellow; /* Borde para visualización */
+        height: 50%; /* Asegura que la caja flex ocupe todo el contenedor */
+        width: 50%; /* Asegura que la caja flex ocupe todo el contenedor */
+    }
+
+
+    #cajaFloat3 {
+    display: flex; /* Usa Flexbox para centrar la imagen */
+    justify-content: center; /* Centra la imagen horizontalmente */
+    align-items: center; /* Centra la imagen verticalmente */
+}
+
+#cajaFloat3 img {
+    max-width: 100%; /* Limita el ancho máximo al contenedor */
+    max-height: 100%; /* Limita la altura máxima al contenedor */
+    object-fit: contain; /* Asegura que la imagen no se distorsione */
+}
+
+
+
+
+</style>
+</head>
+<body>
+<div class="grid-container">
+    <div id="Contenedor1">
+        <div class="cajaFlex" id="cajaFlex1">
+            <img id="Imagen1" src="https://static01.nyt.com/images/2024/04/12/multimedia/18fallout-explainer-ESP-1/12fallout-explainer-wvgq-articleLarge.jpg?quality=75&auto=webp&disable=upscale" alt="">
+
+        </div>
+        <p>Fallout es un videojuego de rol de 1997 desarrollado y publicado por Interplay Productions. En un mundo postapocalíptico y retrofuturista a mediados del siglo XXII, nueve décadas después de una guerra nuclear, el protagonista, el Morador del Refugio, habita en el búnker nuclear subterráneo Refugio 13. Luego de crear el personaje, el jugador debe buscar en el yermo un chip de computadora que pueda reparar el sistema de suministro de agua del refugio. También interactúa con otros supervivientes, algunos de los cuales les asignan misiones, y participa en combates por turnos en los que lucha hasta que se agoten sus puntos de acción.</p>
+    </div>
+    <div id="Contenedor2">
+        <div class="cajaFloat" id="cajaFloat3">
+            <img id="Imagen1" src="https://cdn.akamai.steamstatic.com/steam/apps/377160/capsule_616x353.jpg?t=1590968360" alt="">
+        </div>
+
+
+    </div>
+    <div id="Contenedor3">
+        <div class="cajaFlex" id="cajaFlex2">
+            <img id="Imagen1" src="https://upload.wikimedia.org/wikipedia/commons/9/99/Timothy-cain-gdc2010_cropped.jpg" alt="">
+        </div>
+        <p>Tim Cain (en 2010) fue el creador, productor y uno de los programadores de Fallout</p>
+    </div>
+
+    <div id="Contenedor4">
+        <div class="cajaFloat" id="cajaFloat1">
+            <img id="Imagen1" src="https://cdn.akamai.steamstatic.com/steam/apps/377160/capsule_616x353.jpg?t=1590968360" alt="">
+        </div>
+        <div class="cajaFloat" id="cajaFloat2">
+            <img id="Imagen1" src="https://assets.nintendo.com/image/upload/ar_16:9,c_lpad,w_801/b_white/f_auto/q_auto/ncom/software/switch/70010000008661/9da4158e053625c86c36e495abffe6952e6caf494e4af5c849d95d9c23dbdcb5" alt="">
+        </div>
+    </div>
+</div>
+</body>
+</html>
