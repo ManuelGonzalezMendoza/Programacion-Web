@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Practica Float</title>
+    <style>
+     .Contenedor
+     {
+     display: flex;
+width: 100vw;
+ 
+     }
+     .Hijo
+     {
+        border:  1px solid blue;
+        background-color: aqua;
+        flex-grow: 1;
+        text-align: center;
+     }
+     @media screen and(max-width:500px)
+     {
+.Contenedor
+{
+    flex-direction: column;
+}
+     }
+    </style>
+</head>
+<body>
+<div class="Contenedor">
+<div class="Hijo">hijo1</div>
+<div class="Hijo">hijo2</div>
+<div class="Hijo">hijo3</div>
+<div class="Hijo">hijo4</div>
+<div class="Hijo">hijo5</div>
+<div class="Hijo">hijo6</div>
+</body>
+</html>
