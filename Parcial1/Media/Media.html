@@ -3,34 +3,34 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Practica Float</title>
+    <title>Media</title>
     <style>
-  *{
+
+        *{
     box-sizing: border-box;
     margin: 0;
     padding: 0;
-}
-
+        }
+        
      .Contenedor
      {
-     display: flex;
-width: 100vw;
-
+     display: flex; 
+   width: 100vw;
      }
      .Hijo
      {
         border:  1px solid blue;
-        background-color: aqua;
+        background-color: red;
         flex-grow: 1;
         text-align: center;
      }
-     @media screen and(max-width:500px)
+     @media screen and (max-width: 500px) 
      {
-.Contenedor
-{
-    flex-direction: column;
+    .Contenedor {
+        flex-direction: column;
+    }
 }
-     }
+
     </style>
 </head>
 <body>
@@ -42,6 +42,5 @@ width: 100vw;
 <div class="Hijo">hijo5</div>
 <div class="Hijo">hijo6</div>
 </div>
-
 </body>
 </html>
