@@ -16,94 +16,91 @@
             "enca  barra conte"
             "piepag piepag piepag";
     }
+   
     #Contenedor1 {
-        grid-area:enca; 
-        background-color: aqua;
+        grid-area: enca; 
+        background-color: #2c3e50;
+        color: #ecf0f1;
+        padding: 20px;
     }
     #Contenedor2 {
-        grid-area:barra;  
-        background-color: lightblue;
+     grid-area: barra;  
+    background-color: #34495e;  
+    display: flex; 
+    flex-direction: column; 
+    align-items: center; 
+    justify-content: center; 
     }
+
     #Contenedor3 {
-        grid-area:conte;   
-        background-color: lightgreen;
+        grid-area: conte;   
+        background-color: #2c3e50;
+        color: #ecf0f1;
+        padding: 20px;
     }
     #Contenedor4 {
-        grid-area:piepag;  
-        background-color: red;
-        display: flex; /* Usamos flexbox para organizar las cajas */
-        justify-content: space-around; /* Espacio alrededor de las cajas */
-        align-items: center; /* Alinear verticalmente en el centro */
+        grid-area: piepag;  
+        background-color: #1abc9c;
+        display: flex;
+        justify-content: space-around;
+        align-items: center;
+        padding: 20px;
     }
-    .cajaFloat {
-        border: 1px solid blue; /* Borde para visualización */
-        height: 100%; /* Altura fija para las cajas */
-        width: 30%; /* Ancho relativo al contenedor */
-        justify-content: center; /* Centrar imagen horizontalmente */
+
+    
+       h2 {
+    font-size: 1.8em; 
+    color: #ecf0f1; 
+    text-align: center; 
+    margin: 0;
+          }
+    
+    .caja, .cajaFlex {
+        display: flex;          
+        justify-content: center;
         align-items: center;
     }
+
+  #caja1  {
+    width: 27%;
+  }
+  #caja2  {
+    width: 27%;
+  }
+
     img {
-        width: 100%; /* La imagen ocupará todo el ancho de la caja */
-        height: 100%; /* La imagen ocupará todo el alto de la caja */
-        object-fit: cover; /* La imagen cubrirá completamente la caja sin espacio adicional */
-    }      
-
-    .cajaFlex {
-        display: flex;          
-        justify-content: center; /* Centra horizontalmente */
-        align-items: center; /* Centra verticalmente */
-        border: 1px solid yellow; /* Borde para visualización */
-        height: 50%; /* Asegura que la caja flex ocupe todo el contenedor */
-        width: 50%; /* Asegura que la caja flex ocupe todo el contenedor */
+        max-width: 100%;
     }
-
-
-    #cajaFloat3 {
-    display: flex; /* Usa Flexbox para centrar la imagen */
-    justify-content: center; /* Centra la imagen horizontalmente */
-    align-items: center; /* Centra la imagen verticalmente */
-}
-
-#cajaFloat3 img {
-    max-width: 100%; /* Limita el ancho máximo al contenedor */
-    max-height: 100%; /* Limita la altura máxima al contenedor */
-    object-fit: contain; /* Asegura que la imagen no se distorsione */
-}
-
-
-
-
+   
 </style>
 </head>
 <body>
 <div class="grid-container">
     <div id="Contenedor1">
         <div class="cajaFlex" id="cajaFlex1">
-            <img id="Imagen1" src="https://static01.nyt.com/images/2024/04/12/multimedia/18fallout-explainer-ESP-1/12fallout-explainer-wvgq-articleLarge.jpg?quality=75&auto=webp&disable=upscale" alt="">
-
+            <img  src="https://static01.nyt.com/images/2024/04/12/multimedia/18fallout-explainer-ESP-1/12fallout-explainer-wvgq-articleLarge.jpg?quality=75&auto=webp&disable=upscale" alt="Fallout Image">
         </div>
-        <p>Fallout es un videojuego de rol de 1997 desarrollado y publicado por Interplay Productions. En un mundo postapocalíptico y retrofuturista a mediados del siglo XXII, nueve décadas después de una guerra nuclear, el protagonista, el Morador del Refugio, habita en el búnker nuclear subterráneo Refugio 13. Luego de crear el personaje, el jugador debe buscar en el yermo un chip de computadora que pueda reparar el sistema de suministro de agua del refugio. También interactúa con otros supervivientes, algunos de los cuales les asignan misiones, y participa en combates por turnos en los que lucha hasta que se agoten sus puntos de acción.</p>
+        <p>Fallout es un videojuego de rol de 1997 desarrollado por Interplay Productions. Ambientado en un mundo postapocalíptico, el jugador debe buscar un chip de computadora para reparar el suministro de agua de su refugio.</p>
     </div>
     <div id="Contenedor2">
-        <div class="cajaFloat" id="cajaFloat3">
-            <img id="Imagen1" src="https://cdn.akamai.steamstatic.com/steam/apps/377160/capsule_616x353.jpg?t=1590968360" alt="">
+        <div class="caja" id="caja3">
+            <img id="img1" src="https://upload.wikimedia.org/wikipedia/en/7/70/Fallout_4_cover_art.jpg" alt="Fallout 4 Title">
         </div>
-
-
+        <h2>Fallout 4</h2>
     </div>
     <div id="Contenedor3">
         <div class="cajaFlex" id="cajaFlex2">
-            <img id="Imagen1" src="https://upload.wikimedia.org/wikipedia/commons/9/99/Timothy-cain-gdc2010_cropped.jpg" alt="">
+            <img  src="https://upload.wikimedia.org/wikipedia/commons/9/99/Timothy-cain-gdc2010_cropped.jpg" alt="Tim Cain">
         </div>
-        <p>Tim Cain (en 2010) fue el creador, productor y uno de los programadores de Fallout</p>
+        <h2>Tim Cain, creador de Fallout</h2>
     </div>
 
     <div id="Contenedor4">
-        <div class="cajaFloat" id="cajaFloat1">
-            <img id="Imagen1" src="https://cdn.akamai.steamstatic.com/steam/apps/377160/capsule_616x353.jpg?t=1590968360" alt="">
+        <div class="caja" id="caja1">
+            <img  src="https://cdn.akamai.steamstatic.com/steam/apps/377160/capsule_616x353.jpg?t=1590968360" alt="Fallout Image 1">
         </div>
-        <div class="cajaFloat" id="cajaFloat2">
-            <img id="Imagen1" src="https://assets.nintendo.com/image/upload/ar_16:9,c_lpad,w_801/b_white/f_auto/q_auto/ncom/software/switch/70010000008661/9da4158e053625c86c36e495abffe6952e6caf494e4af5c849d95d9c23dbdcb5" alt="">
+        <div class="caja" id="caja2">
+            <img  src="https://assets.nintendo.com/image/upload/ar_16:9,c_lpad,w_801/b_white/f_auto/q_auto/ncom/software/switch/70010000008661/9da4158e053625c86c36e495abffe6952e6caf494e4af5c849d95d9c23dbdcb5" alt="Fallout Image 2">
         </div>
     </div>
 </div>
