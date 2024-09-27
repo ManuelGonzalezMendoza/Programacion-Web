@@ -1,66 +1,77 @@
-h1 {
-  margin-bottom: 20px;
-  margin-top: 40px;
-  text-align: center;
-}
-h2 {
-  margin-bottom: 20px;
-}
-h3 {
-  margin-bottom: 20px;
-  text-align: center;
-  font-size: 2em;
-}
-h4 {
-  margin-bottom: 20px;
-  text-align: center;
-  font-size: 2em;
-  margin-top: 30px;
-}
-h5 {
-  margin-bottom: 20px;
-  text-align: center;
-  font-size: 2em;
-}
-p {
-  margin-bottom: 20px;
+.centered-content {
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 * {
   box-sizing: border-box;
   margin: 0;
   padding: 0;
 }
-#Imagen1 {
-  width: 270px;
-  height: 10px auto;
-  border-radius: 20px;
+body {
+  font-size: 16px;
+  color: #333;
+  background-color: #f0f8ff;
 }
 #Contenedor {
-  background-color: burlywood;
+  background-color: #f0f8ff;
   width: 65%;
   margin: auto;
   font-family: Arial, Helvetica, sans-serif;
   line-height: 1.5em;
-  padding: 51px;
-  background-color: aliceblue;
+  padding: 50px;
+  border: 1px solid #ccc;
+  border-radius: 15px;
+  padding: 20px;
 }
-#Contenedor2 {
-  width: 100px;
-  float: left;
-  padding: 133px;
-  background-image: url(https://img.freepik.com/fotos-premium/sesion-fotos-disenador-grafico-forma-bandera-vertical-grafico-digital-complejo-diseno-grafico-creativo_655090-621450.jpg);
-  /* Imagen de fondo */
-  background-position: center;
-  min-height: 271vh;
-}
+#Contenedor2,
 #Contenedor3 {
   width: 100px;
-  float: right;
   padding: 133px;
-  background-image: url(https://img.freepik.com/fotos-premium/abstracto-gotas-llama-brillante-iluminacion-electrica-ia-generativa_1038396-44.jpg);
-  /* Imagen de fondo */
+  float: left;
   background-position: center;
   min-height: 271vh;
+}
+#Contenedor2 {
+  background-image: url(https://img.freepik.com/fotos-premium/sesion-fotos-disenador-grafico-forma-bandera-vertical-grafico-digital-complejo-diseno-grafico-creativo_655090-621450.jpg);
+}
+#Contenedor3 {
+  background-image: url(https://img.freepik.com/fotos-premium/abstracto-gotas-llama-brillante-iluminacion-electrica-ia-generativa_1038396-44.jpg);
+}
+h1,
+h2,
+h3,
+h4,
+h5 {
+  margin-bottom: 20px;
+  text-align: center;
+}
+h1 {
+  font-size: 3em;
+  margin-top: 40px;
+}
+h2 {
+  font-size: 2.5em;
+}
+h3,
+h4,
+h5 {
+  font-size: 2em;
+}
+p {
+  margin-bottom: 20px;
+}
+#Imagen1 {
+  width: 270px;
+  border-radius: 20px;
+}
+.Cuadro {
+  background-color: antiquewhite;
+  margin: 20px auto;
+  border: 1px solid #ddd;
+  border-radius: 15px;
+  padding: 20px;
+  width: 80%;
 }
 iframe {
   display: block;
@@ -72,10 +83,28 @@ img {
   width: 300px;
   height: 300px;
 }
-.Cuadro {
-  background-color: antiquewhite;
-  padding: 10px;
-  border-radius: 15px;
-  margin: 20px auto;
-  width: 80%;
+@media screen and (max-width: 768px) {
+  #Contenedor {
+    width: 90%;
+  }
+  #Contenedor2,
+  #Contenedor3 {
+    width: 50px;
+    padding: 70px;
+  }
+  img {
+    width: 200px;
+    height: auto;
+  }
+  h1 {
+    font-size: 2em;
+  }
+  h2 {
+    font-size: 1.75em;
+  }
+  h3,
+  h4,
+  h5 {
+    font-size: 1.5em;
+  }
 }
