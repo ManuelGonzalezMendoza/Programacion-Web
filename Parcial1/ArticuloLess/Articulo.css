@@ -1,0 +1,76 @@
+h1,
+h2,
+h3,
+h4,
+h5 {
+  margin-bottom: 20px;
+  text-align: center;
+  font-size: 2em;
+}
+h1 {
+  margin-top: 40px;
+}
+h3,
+h4 {
+  font-size: 2em;
+  margin-top: 30px;
+}
+p {
+  margin-bottom: 20px;
+}
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+#Contenedor {
+  background-color: aliceblue;
+  width: 65%;
+  margin: auto;
+  font-family: Arial, Helvetica, sans-serif;
+  line-height: 1.5em;
+  padding: 105px;
+  border-radius: 20px;
+}
+#Contenedor2,
+#Contenedor3 {
+  width: 100px;
+  float: left;
+  padding: 133px;
+  min-height: 271vh;
+}
+#Contenedor2:nth-child(2),
+#Contenedor3:nth-child(2) {
+  float: right;
+}
+#Contenedor2 {
+  background-image: url('https://img.freepik.com/fotos-premium/sesion-fotos-disenador-grafico-forma-bandera-vertical-grafico-digital-complejo-diseno-grafico-creativo_655090-621450.jpg');
+  background-position: center;
+}
+#Contenedor3 {
+  background-image: url('https://img.freepik.com/fotos-premium/abstracto-gotas-llama-brillante-iluminacion-electrica-ia-generativa_1038396-44.jpg');
+  background-position: center;
+}
+#Imagen1 {
+  width: 270px;
+  height: auto;
+  border-radius: 20px;
+}
+.Cuadro {
+  background-color: antiquewhite;
+  padding: 10px;
+  border-radius: 15px;
+  margin: 20px auto;
+  width: 80%;
+}
+iframe {
+  display: block;
+  margin: 20px auto;
+}
+img {
+  display: block;
+  margin: 20px auto;
+  width: 300px;
+  height: 300px;
+  border-radius: 20px;
+}
