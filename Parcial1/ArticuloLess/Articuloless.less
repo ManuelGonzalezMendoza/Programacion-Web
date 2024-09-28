@@ -1,0 +1,124 @@
+// Variables
+@marginbottom: 20px;
+@primary-color: burlywood;
+@container-bg: aliceblue;
+@cuadro-bg: antiquewhite;
+@font-family: Arial, Helvetica, sans-serif;
+
+// Mixin para bordes redondeados
+.rounded(@radius: 15px) {
+    border-radius: @radius;
+}
+
+// Estilo global para todos los elementos
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+// Estilos para los encabezados utilizando anidación
+h1, h2, h3, h4, h5 {
+    margin-bottom: @marginbottom;
+    text-align: center;
+    font-size: 2em;
+
+    h1 {
+        margin-top: 40px; // Anidación para h1 específico
+    }
+
+    h3, h4 {
+        font-size: 2em;
+        margin-top: 30px; // Anidación para h3 y h4 específicos
+    }
+}
+
+// Estilo para los párrafos
+p {
+    margin-bottom: @marginbottom;
+}
+
+// Estilo para el contenedor principal
+#Contenedor {
+    background-color: @container-bg;
+    width: 65%;
+    margin: auto;
+    font-family: @font-family;
+    line-height: 1.5em;
+    padding: 51px;
+    .rounded(20px); // Aplicación del mixin para bordes redondeados
+
+    // Anidación de estilo para los enlaces dentro del contenedor
+    a {
+        color: darkblue;
+        text-decoration: none;
+
+        &:hover {
+            text-decoration: underline; // Estilo al pasar el cursor sobre el enlace
+        }
+    }
+}
+
+// Estilo para los contenedores laterales (izquierda y derecha)
+#Contenedor2, #Contenedor3 {
+    width: 100px;
+    float: left;
+    padding: 133px;
+    min-height: 271vh;
+
+    // Anidación para Contenedor3
+    &:nth-child(2) { 
+        float: right; // Aplica float: right solo al segundo contenedor (#Contenedor3)
+    }
+}
+
+#Contenedor2 {
+    background-image: url('https://img.freepik.com/fotos-premium/sesion-fotos-disenador-grafico-forma-bandera-vertical-grafico-digital-complejo-diseno-grafico-creativo_655090-621450.jpg');
+    background-position: center;
+}
+
+#Contenedor3 {
+    background-image: url('https://img.freepik.com/fotos-premium/abstracto-gotas-llama-brillante-iluminacion-electrica-ia-generativa_1038396-44.jpg');
+    background-position: center;
+}
+
+// Estilo para la imagen principal dentro del contenedor
+#Imagen1 {
+    width: 270px;
+    height: auto;
+    .rounded(20px); // Uso del mixin para bordes redondeados
+}
+
+// Estilo para el componente Cuadro
+.Cuadro {
+    background-color: @cuadro-bg;
+    padding: 10px;
+    margin: 20px auto;
+    width: 80%;
+    .rounded(15px); // Uso del mixin para bordes redondeados
+
+    // Anidación de elementos dentro del cuadro
+    h3 {
+        color: @primary-color; // Color personalizado
+    }
+
+    p {
+        font-size: 1em;
+        line-height: 1.4em;
+    }
+}
+
+// Estilo para el iframe
+iframe {
+    display: block;
+    margin: 20px auto;
+}
+
+// Estilo general para las imágenes dentro del contenedor
+img {
+    display: block;
+    margin: 20px auto;
+    width: 300px;
+    height: 300px;
+    .rounded(20px); // Aplicación del mixin para bordes redondeados
+}
