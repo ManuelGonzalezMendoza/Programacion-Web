@@ -1,0 +1,24 @@
+HTTP/1.1 200 OK
+cf-cache-status: DYNAMIC
+cf-ray: 8cb458fbd92428e8-DFW
+connection: keep-alive
+content-encoding: br
+content-type: application/json
+date: Mon, 30 Sep 2024 12:52:00 GMT
+nel: {"report_to":"heroku-nel","max_age":3600,"success_fraction":0.005,"failure_fraction":0.05,"response_headers":["Via"]}
+report-to: {"group":"heroku-nel","max_age":3600,"endpoints":[{"url":"https://nel.heroku.com/reports?ts=1727700720&sid=812dcc77-0bd0-43b1-a5f1-b25750382959&s=sHZN8LwIB%2FpbvHz4Bsmqm1DKrnTKb0L2n2J3NG1z8WQ%3D"}]}
+reporting-endpoints: heroku-nel=https://nel.heroku.com/reports?ts=1727700720&sid=812dcc77-0bd0-43b1-a5f1-b25750382959&s=sHZN8LwIB%2FpbvHz4Bsmqm1DKrnTKb0L2n2J3NG1z8WQ%3D
+server: cloudflare
+transfer-encoding: chunked
+vary: Origin, Access-Control-Request-Method, Access-Control-Request-Headers
+via: 1.1 vegur
+
+{
+  "categories": [],
+  "created_at": "2020-01-05 13:42:23.240175",
+  "icon_url": "https://api.chucknorris.io/img/avatar/chuck-norris.png",
+  "id": "-dDEdlfdTV6-3I9IPdJKHQ",
+  "updated_at": "2020-01-05 13:42:23.240175",
+  "url": "https://api.chucknorris.io/jokes/-dDEdlfdTV6-3I9IPdJKHQ",
+  "value": "Chuck Norris got his first pair of nunchucks when he was a zygote."
+}
