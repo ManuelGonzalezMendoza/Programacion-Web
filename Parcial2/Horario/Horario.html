@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Horario de Clase</title>
 
     <style> 
         * {
@@ -25,14 +25,26 @@
             background-color: aqua;
         }
 
+        tbody > tr:nth-child(even) {
+            background-color: lightgray;
+        }
+
+        tbody > tr:first-child {
+            font-weight: bold;
+            color: navy;
+        }
+
         tbody > tr:hover {
             background-color: black;
             color: wheat;
         }
 
-        /* Estilo para las celdas vacías */
+        td:nth-child(2) {
+            background-color: lightblue;
+        }
+
         td:empty {
-            background-color: lightgray;
+            background-color: red;
         }
 
         @media screen and (max-width: 500px) {
@@ -40,10 +52,35 @@
                 display: block;
             }
 
-            tbody tr > td:first-child {
-                background-color: blue;
-                color: antiquewhite;
-                text-align: center;
+            thead {
+                display: none;
+            }
+
+           
+            tbody td:nth-child(1)::before {
+                content: "MATERIA: ";
+            }
+            tbody td:nth-child(2)::before {
+                content: "Lunes: ";
+            }
+            tbody td:nth-child(3)::before {
+                content: "Martes: ";
+            }
+            tbody td:nth-child(4)::before {
+                content: "Miércoles: ";
+            }
+            tbody td:nth-child(5)::before {
+                content: "Jueves: ";
+            }
+            tbody td:nth-child(6)::before {
+                content: "Viernes: ";
+            }
+
+           
+            tbody td::before {
+                font-weight: bold;
+                display: block;
+                margin-bottom: 5px;
             }
         }
     </style>
