@@ -6,105 +6,110 @@
     <title>Document</title>
 
     <style> 
-*{
-box-sizing: border-box;
-margin: 0;
-padding: 0;
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
 
-}
-table{
-   width: 100%;
+        table {
+            width: 100%;
+        }
 
-}
-table, td{
-border: 2px solid blue;
-border-collapse: collapse;
+        table, td {
+            border: 2px solid blue;
+            border-collapse: collapse;
+        }
 
-}
+        tbody > tr:nth-child(odd) {
+            background-color: aqua;
+        }
 
-tbody > tr:nth-child(odd)
-{
-background-color: aqua;
-}
+        tbody > tr:hover {
+            background-color: black;
+            color: wheat;
+        }
 
-@media screen and (max-width: 500px) 
-{
-  table, tbody, thead, tr, td{
-    display: block;
-  }
+        /* Estilo para las celdas vacías */
+        td:empty {
+            background-color: lightgray;
+        }
 
-}
-    
+        @media screen and (max-width: 500px) {
+            table, tbody, thead, tr, td {
+                display: block;
+            }
 
-</style>
+            tbody tr > td:first-child {
+                background-color: blue;
+                color: antiquewhite;
+                text-align: center;
+            }
+        }
+    </style>
 </head>
 <body>
     <table>
-         <thead>
-           <tr>
-            <td>MATERIA</td>
-            <td>Lunes </td>
-            <td>Martes </td>
-            <td>Miercoles</td>
-            <td>Jueves</td>
-            <td>Viernes</td>
-
-           </tr>
-          </thead>
-
-         <tbody>
-
+        <thead>
             <tr>
-                 <td>PROGRAMACION WEB</td>
-                 <td>7:00-8:00</td>
-                 <td>7:00-8:00</td>
-                 <td>7:00-8:00</td>
-                 <td>7:00-8:00</td>
-                 <td>7:00-8:00</td>              
-              </tr>
-              <tr> 
+                <td>MATERIA</td>
+                <td>Lunes</td>
+                <td>Martes</td>
+                <td>Miércoles</td>
+                <td>Jueves</td>
+                <td>Viernes</td>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>PROGRAMACIÓN WEB</td>
+                <td>7:00-8:00</td>
+                <td>7:00-8:00</td>
+                <td>7:00-8:00</td>
+                <td>7:00-8:00</td>
+                <td>7:00-8:00</td>              
+            </tr>
+            <tr>
                 <td>FUNDAMENTOS DE TELECOMUNICACIONES</td>
                 <td></td>
-                <td>11:00-13:00</td> 
+                <td>11:00-13:00</td>
                 <td>11:00-12:00</td>
                 <td>11:00-12:00</td>
-              </tr>
-
-              <tr>
-                 <td>ESTRUCTURA DE DATO</td>
-                 <td></td>
-                 <td>8:00-10:00</td>
-                 <td></td>
-                 <td>8:00-10:00</td>
-                 <td>10:00-11:00</td>
-              </tr>
-              <tr>
-             <td>CULTURA EMPRESARIAL</td>
-             <td>8:00-10:00</td>
-             <td></td>
-             <td>8:00-10:00</td> 
-             <td></td>
+                <td></td>
             </tr>
-
             <tr>
-              <td>GRAFICACION</td>
-              <td>14:00-15:00</td>
-              <td>14:00-15:00</td>
-              <td>14:00-15:00</td>
-              <td>14:00-15:00</td>
-              <td></td>
+                <td>ESTRUCTURA DE DATOS</td>
+                <td></td>
+                <td>8:00-10:00</td>
+                <td></td>
+                <td>8:00-10:00</td>
+                <td>10:00-11:00</td>
             </tr>
-
             <tr>
-              <td>ARQUITECTURA DE TELECOMUNICACIONES</td>
-              <td>11:00-13:00</td>
-              <td></td>
-              <td>12:00-13:00</td>
-              <td></td>
-              <td>11:00-13:00</td>
+                <td>CULTURA EMPRESARIAL</td>
+                <td>8:00-10:00</td>
+                <td></td>
+                <td>8:00-10:00</td> 
+                <td></td>
+                <td></td>
             </tr>
-         </tbody>
-
+            <tr>
+                <td>GRAFICACIÓN</td>
+                <td>14:00-15:00</td>
+                <td>14:00-15:00</td>
+                <td>14:00-15:00</td>
+                <td>14:00-15:00</td>
+                <td></td>
+            </tr>
+            <tr>
+                <td>ARQUITECTURA DE TELECOMUNICACIONES</td>
+                <td>11:00-13:00</td>
+                <td></td>
+                <td>12:00-13:00</td>
+                <td></td>
+                <td>11:00-13:00</td>
+            </tr>
+        </tbody>
     </table>
 </body>
 </html>
