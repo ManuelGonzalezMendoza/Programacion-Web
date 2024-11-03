@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Página de Ofertas de Steam</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="contenedor">
+        <h1>Ofertas de Steam</h1>
+        <input type="text" id="buscador" placeholder="Buscar juegos...">
+        <button id="boton-buscar">Buscar</button>
+
+        <h2>Resultados de Búsqueda</h2>
+        <div id="resultados-busqueda" class="ofertas"></div>
+
+        <h2>Top 5 Ofertas por Rating</h2>
+        <div id="ofertas-rating" class="ofertas"></div>
+
+        <h2>Top 5 Juegos por Metacritic</h2>
+        <div id="ofertas-metacritic" class="ofertas"></div>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>
