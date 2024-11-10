@@ -24,7 +24,7 @@ app.get("/estudiantes/:carrera",(req,res)=>{
     res.send('Servidor contestando a peticion GET con parametros')
     })
 
-const PORT =3000;
+const PORT =8082;
 app.listen(PORT,()=>{
     console.info(`Servidor corriendo en el puerto ${PORT}`);
 });
