@@ -17,7 +17,7 @@ app.get('/',(req,res)=>{res.send('Hola mundo')})
 app.get("/administrativos",(req,res)=>{
     console.log(req.query);
     res.send('Servidor contestando a peticion GET con parametros en el query')
-    res.render(admin)
+    res.render('admin')
     })
 
 app.get("/maestros",(req,res)=>{
