@@ -8,7 +8,7 @@ app.use(express.json());
 app.use(express.text());
 
 app.set('view engine','pug');
-app.set('views',path.join(_dirname), 'views');
+app.set('views',path.join(__dirname, 'vistas'))
 
 
 app.get('/',(req,res)=>{res.send('Hola mundo')})
@@ -16,7 +16,7 @@ app.get('/',(req,res)=>{res.send('Hola mundo')})
 
 app.get("/administrativos",(req,res)=>{
     console.log(req.query);
-    res.send('Servidor contestando a peticion GET con parametros en el query')
+  
     res.render('admin')
     })
 
@@ -36,6 +36,3 @@ const PORT =3000;
 app.listen(PORT,()=>{
     console.info(`Servidor corriendo en el puerto ${PORT}`);
 });
-
-
-
