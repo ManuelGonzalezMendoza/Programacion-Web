@@ -8,16 +8,9 @@ app.use(express.text());
 app.use(express.urlencoded({extended:true}))
 
 
-
-app.get("/administrativos",(req,res)=>{
-    console.log(req.query);
-  
-    res.render('admin')
-    })
-
 app.get("/formulario",(req,res)=>{
 console.log(req.body);
-res.send('Hola  ${req.body.nombre}' )
+res.send( `Hola  ${req.body.nombre}` )
 })
 
 
