@@ -11,7 +11,7 @@ app.use(express.text());
 
 
 app.post("/Formulario", upload.single('archivos'), (req, res) => {
-    res.status(200).send("Archivo recibido ");
+    res.status(200).send(`Hola  ${req.body.nombre}`);
 });
 
 
