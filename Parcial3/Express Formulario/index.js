@@ -11,6 +11,7 @@ app.use(express.json());
 app.use(express.text());
 app.use(upload.single('archivo'));  
 
+app.use(express.urlencoded({extend:true}));
 
 app.post("/formulario",(req,res)=>{
 console.log(req.body);
