@@ -8,7 +8,7 @@ const upload = multer({ dest: folder });
 
 app.use(express.json());
 app.use(express.text());
-
+app.use(cors())
 
 app.post("/formulario", upload.single('archivos'), (req, res) => {
     console.log(req.body)
