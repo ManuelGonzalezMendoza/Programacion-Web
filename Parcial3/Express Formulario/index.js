@@ -11,6 +11,7 @@ app.use(express.text());
 
 
 app.post("/formulario", upload.single('archivos'), (req, res) => {
+    console.log(req.body)
     res.status(200).send(`Hola  ${req.body.nombre}`);
 });
 
