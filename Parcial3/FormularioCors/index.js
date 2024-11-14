@@ -1,6 +1,7 @@
 const express = require("express");
 const path = require("path");
 const multer = require("multer");
+var cors = require('cors')
 const app = express();
 
 const folder = path.join(__dirname, 'archivos');
