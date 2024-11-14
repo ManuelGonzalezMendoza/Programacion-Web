@@ -10,7 +10,7 @@ app.use(express.json());
 app.use(express.text());
 
 
-app.post("/Formulario", upload.single('archivos'), (req, res) => {
+app.post("/formulario", upload.single('archivos'), (req, res) => {
     res.status(200).send(`Hola  ${req.body.nombre}`);
 });
 
