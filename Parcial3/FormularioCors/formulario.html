@@ -32,7 +32,7 @@
 
   <script>
     document.getElementById("btnjs").addEventListener("click", (event) => {
-        event.preventDefault(); // Evita que el formulario se envíe de forma tradicional
+         
         const datosForm = new FormData(document.getElementById("form")); // Cambié "miForm" por "form"
         
         fetch("http://localhost:3000/formulario", { 
