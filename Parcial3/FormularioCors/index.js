@@ -4,6 +4,7 @@ const multer = require('multer');
 const cors = require('cors');
 const jsPDF = require('jspdf');
 const app = express();
+const fs = require('fs');
 
 // Configuración de almacenamiento de multer
 const storage = multer.diskStorage({
