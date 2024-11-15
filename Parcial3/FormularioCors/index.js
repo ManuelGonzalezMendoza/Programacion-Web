@@ -2,7 +2,9 @@ const express = require('express');
 const path = require('path');
 const multer = require('multer');
 const cors = require('cors');
-const jsPDF = require("jspdf");
+const { jsPDF } = require('jspdf'); // Importación correcta para Node.js
+const fs = require('fs'); // Para guardar el archivo en el sistema de archivos
+
 const app = express();
 
 
