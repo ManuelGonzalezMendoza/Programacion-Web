@@ -9,7 +9,7 @@
 <body>
   <div class="container mt-5">
     <h2>Formulario</h2>
-    <form action="http://localhost:8081/formulario" method="POST" enctype="multipart/form-data" id="form">
+    <form action="http://localhost:8080/formulario" method="POST" enctype="multipart/form-data" id="form">
       <div class="mb-3">
         <label for="nombre" class="form-label">Nombre</label>
         <input type="text" class="form-control" id="nombre" name="nombre" required>
@@ -35,7 +35,7 @@
          
         const datosForm = new FormData(document.getElementById("form")); // Cambié "miForm" por "form"
         
-        fetch("http://localhost:8081/formulario", { 
+        fetch("http://localhost:8080/formulario", { 
             method: "POST", 
             body: datosForm 
         })

@@ -6,7 +6,7 @@
     <title>Formulario</title>
 </head>
 <body>
-    <form id="miForm" method="POST" action="http://localhost:8081/formulario" enctype="multipart/form-data">
+    <form id="miForm" method="POST" action="http://localhost:3000/formulario" enctype="multipart/form-data">
         <label for="nom">Nombre:</label>
         <input id="nom" type="text" name="nombre"><br>
         
@@ -24,7 +24,7 @@
         document.getElementById("btnjs").addEventListener("click", () => {
             const datosForm = new FormData(document.getElementById("miForm"));
             
-            fetch("http://localhost:8081/formulario", { 
+            fetch("http://localhost:3000/formulario", { 
                 method: "POST", 
                 body: datosForm 
             })
