@@ -2,7 +2,7 @@ const express = require('express');
 const path = require('path');
 const multer = require('multer');
 const cors = require('cors');
-const jsPDF = require('jspdf');
+const jsPDF = require('pdfkit');
 const app = express();
 
 
