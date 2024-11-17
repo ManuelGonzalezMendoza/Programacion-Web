@@ -3,6 +3,7 @@ const path = require('path');
 const multer = require('multer');
 const cors = require('cors');
 const fs = require('fs');
+const sharp = require('sharp'); // Para procesar imágenes
 const { jsPDF } = require('jspdf'); // Importación correcta para Node.js
 
 const app = express();
@@ -30,31 +31,38 @@ app.post('/formulario', (req, res) => {
   const doc = new jsPDF();
   const uploadedFilePath = path.join(__dirname, '/archivosrec/', 'archivo_unico'); // Ruta fija de la imagen
 
-  // Agregar texto al PDF
-  doc.text(`Hello ${req.body.nombre}`, 10, 10);
+  // Procesar y redimensionar la imagen con sharp
+  sharp(uploadedFilePath)
+    .resize(500, 500, { fit: 'inside' }) // Redimensionar la imagen a un máximo de 500x500 píxeles
+    .toFormat('jpeg') // Convertir cualquier formato a JPEG
+    .toBuffer()
+    .then(data => {
+      // Convertir la imagen redimensionada a Base64
+      const base64Image = data.toString('base64');
+      const imageFormat = 'jpeg'; // Usamos JPEG como formato estándar
 
-  // Leer el archivo de imagen cargado y convertirlo a Base64
-  fs.readFile(uploadedFilePath, (err, data) => {
-    if (err) {
-      console.error('Error al leer la imagen:', err);
+      // Agregar texto al PDF
+      doc.text(`Hello ${req.body.nombre}`, 10, 10);
+
+      // Agregar la imagen al PDF
+      doc.addImage(`data:image/${imageFormat};base64,${base64Image}`, 'JPEG', 10, 20, 100, 100); // Ajustar tamaño y posición de la imagen
+
+      // Guardar el PDF generado con un nombre fijo
+      let pdfPath = path.join(__dirname, '/archivosgen/a4.pdf');
+      doc.save(pdfPath);
+
+      // Eliminar la imagen temporal para evitar acumulación de archivos
+      fs.unlink(uploadedFilePath, err => {
+        if (err) console.error('Error al eliminar el archivo temporal:', err);
+      });
+
+      // Enviar el archivo PDF generado al cliente
+      res.sendFile(pdfPath);
+    })
+    .catch(err => {
+      console.error('Error al procesar la imagen:', err);
       res.status(500).send('Error al procesar la imagen');
-      return;
-    }
-
-    // Convertir la imagen a Base64
-    const base64Image = Buffer.from(data).toString('base64');
-    const imageFormat = 'jpeg'; // Define el formato como fijo (puedes cambiarlo según sea necesario)
-
-    // Agregar la imagen al PDF
-    doc.addImage(`data:image/${imageFormat};base64,${base64Image}`, 'JPEG', 10, 20, 100, 100); // Ajusta las coordenadas y el tamaño según sea necesario
-
-    // Guardar el PDF generado con un nombre fijo
-    let pdfPath = path.join(__dirname, '/archivosgen/a4.pdf');
-    doc.save(pdfPath);
-
-    // Enviar el archivo PDF generado al cliente
-    res.sendFile(pdfPath);
-  });
+    });
 });
 
 const PORT = 3000;
