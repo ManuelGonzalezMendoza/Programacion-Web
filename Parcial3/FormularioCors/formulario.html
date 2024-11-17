@@ -9,24 +9,24 @@
     <form id="miForm" method="POST" action="http://localhost:3000/formulario" enctype="multipart/form-data">
         <label for="nom">Nombre:</label>
         <input id="nom" type="text" name="nombre"><br>
-        
+       
         <label for="ape">Apellido:</label>
         <input id="ape" type="text" name="apellido"><br>
-        
+       
         <label for="arc">Archivo:</label>
         <input id="arc" type="file" name="archivo"><br>
-        
+       
         <input id="btnht" type="submit" value="EnviarForm">
         <input id="btnjs" type="button" value="EnviarJs">
     </form>
-
+ 
     <script>
         document.getElementById("btnjs").addEventListener("click", () => {
             const datosForm = new FormData(document.getElementById("miForm"));
-            
-            fetch("http://localhost:3000/formulario", { 
-                method: "POST", 
-                body: datosForm 
+           
+            fetch("http://localhost:3000/formulario", {
+                method: "POST",
+                body: datosForm
             })
             .then(response => response.blob())
             .then(archivoPDF => {
@@ -38,4 +38,6 @@
     </script>
 </body>
 </html>
-
+ 
+ 
+ 
