@@ -10,7 +10,7 @@
     
 <div class="container">
     <h1 class="text-center">Formulario</h1>
-    <form id="miForm" method="POST" action="http://localhost:3000/formulario" enctype="multipart/form-data">
+    <form id="miForm" method="POST" action="http://localhost:8081/formulario" enctype="multipart/form-data">
         <div class="mb-3">
             <label for="nombre" class="form-label">Nombre</label>
             <input type="text" class="form-control" id="nombre" name="nombre" placeholder="">
@@ -36,7 +36,7 @@
     document.getElementById("btnjs").addEventListener("click", () => {
             const datosForm = new FormData(document.getElementById("miForm"));
            
-            fetch("http://localhost:3000/formulario", {
+            fetch("http://localhost:8081/formulario", {
                 method: "POST",
                 body: datosForm
             })
