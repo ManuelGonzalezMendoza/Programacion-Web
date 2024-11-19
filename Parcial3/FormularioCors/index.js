@@ -24,16 +24,21 @@ const storage = multer.diskStorage({
 
 const upload = multer({
   storage: storage,
-  limits: { fileSize: 5 * 1024 * 1024 }, // Límite de 5 MB
+  limits: { fileSize: 20 * 1024 * 1024 }, // Límite de 20 MB
 });
 
 // Middleware
-app.use(express.json());
+app.use(express.json({ limit: '10mb' })); // Incrementar límite del cuerpo JSON
+app.use(express.urlencoded({ limit: '10mb', extended: true })); // Incrementar límite para datos codificados en URL
 app.use(cors());
 app.use(upload.single('archivo')); // Procesar archivo con Multer
 
 // Ruta para manejar el formulario
 app.post('/formulario', (req, res) => {
+  if (!req.file) {
+    return res.status(400).send('No se recibió ningún archivo.');
+  }
+
   const doc = new jsPDF();
   const uploadedFilePath = path.join(__dirname, '/archivosrec/', 'archivo_unico'); // Ruta fija de la imagen
   const outputFilePath = path.join(__dirname, '/archivosgen/A4.pdf'); // Ruta para guardar el PDF generado
@@ -43,14 +48,16 @@ app.post('/formulario', (req, res) => {
     fs.mkdirSync(path.dirname(outputFilePath), { recursive: true });
   }
 
-  // Redimensionar y comprimir la imagen con sharp
+  // Procesar la imagen con sharp y manejar errores
   sharp(uploadedFilePath)
     .resize({ width: 500 }) // Ajusta el ancho máximo (manteniendo proporción)
     .jpeg({ quality: 80 }) // Reducir calidad para ahorrar espacio
-    .toBuffer()
-    .then((buffer) => {
-      // Convertir la imagen a Base64
-      const base64Image = buffer.toString('base64');
+    .toFile(path.join(__dirname, '/archivosrec/processed_image.jpeg')) // Guardar imagen procesada
+    .then(() => {
+      const processedFilePath = path.join(__dirname, '/archivosrec/processed_image.jpeg');
+
+      // Leer la imagen procesada como base64
+      const base64Image = fs.readFileSync(processedFilePath, 'base64');
 
       // Agregar texto al PDF
       doc.text(`Hello ${req.body.nombre}`, 10, 10);
