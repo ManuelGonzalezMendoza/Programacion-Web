@@ -63,8 +63,7 @@ app.post('/formulario', (req, res) => {
       const base64Image = buffer.toString('base64');
 
       // Agregar texto al PDF
-      doc.text('Este es un PDF generado a partir del archivo procesado.', 10, 10);
-      doc.text(`Nombre original del archivo: ${req.file.originalname}`, 10, 20);
+      doc.text(`Hello ${req.body.nombre}`, 10, 10);
 
       // Agregar la imagen al PDF
       doc.addImage(`data:image/jpeg;base64,${base64Image}`, 'JPEG', 10, 30, 150, 100);
