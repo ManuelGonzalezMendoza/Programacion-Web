@@ -65,9 +65,12 @@
         }
 
         // Validar campo archivo
-        if (archivo.files.length === 0) {
+        const allowedTypes = ["image/jpeg", "image/png"];
+        const file = archivo.files[0];
+        if (!file || !allowedTypes.includes(file.type)) {
             archivo.classList.add("is-invalid");
             esValido = false;
+            alert("Solo se permiten archivos de imagen (JPEG o PNG).");
         } else {
             archivo.classList.remove("is-invalid");
             archivo.classList.add("is-valid");
@@ -86,7 +89,7 @@
             })
             .then(response => {
                 if (!response.ok) {
-                    throw new Error("Solo se aceptan imagenes jpg o png.");
+                    throw new Error("Solo se aceptan imágenes jpg o png.");
                 }
                 return response.blob();
             })
