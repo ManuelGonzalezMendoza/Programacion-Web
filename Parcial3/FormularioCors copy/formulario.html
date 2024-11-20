@@ -9,7 +9,7 @@
 <body>
 <div class="container mt-5">
     <h1 class="text-center">Formulario</h1>
-    <form id="miForm" method="POST" action="http://localhost:8082/formulario" enctype="multipart/form-data" novalidate>
+    <form id="miForm" method="POST" action="http://localhost:8083/formulario" enctype="multipart/form-data" novalidate>
         <!-- Campo Nombre -->
         <div class="mb-3">
             <label for="nombre" class="form-label">Nombre</label>
@@ -80,7 +80,7 @@
     document.getElementById("btnjs").addEventListener("click", () => {
         if (validarFormulario()) {
             const datosForm = new FormData(document.getElementById("miForm"));
-            fetch("http://localhost:8082/formulario", {
+            fetch("http://localhost:8083/formulario", {
                 method: "POST",
                 body: datosForm
             })
