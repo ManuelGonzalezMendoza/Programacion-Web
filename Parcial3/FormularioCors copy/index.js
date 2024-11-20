@@ -2,7 +2,7 @@ const multer = require('multer');
 const cors = require('cors');
 const fs = require('fs');
 const sharp = require('sharp');
-const { jsPDF } = require('jspdf');
+const PDFDocument = require('pdfkit'); // Usar PDFKit
 const path = require('path');
 const express = require('express');
 const { check, validationResult } = require('express-validator'); // Importar express-validator
@@ -76,32 +76,38 @@ app.post(
     const pdfFileName = generarNombreUnico('A4', '.pdf'); // Generar un nombre único para el PDF
     const outputFilePath = path.join(pdfDirectory, pdfFileName);
 
-    // Crear el PDF
-    const doc = new jsPDF();
+    // Crear un nuevo documento PDF con PDFKit
+    const doc = new PDFDocument();
+    const stream = fs.createWriteStream(outputFilePath);
+    doc.pipe(stream); // Escribe el PDF en un archivo
 
-    // Procesar la imagen y agregarla al PDF
     const uploadedFilePath = req.file.path; // Ruta del archivo subido
     sharp(uploadedFilePath)
-      .resize({ width: 500 }) // Redimensionar la imagen
-      .jpeg({ quality: 80 }) // Convertir a formato JPEG
+      .resize({ width: 500, height: 500, fit: 'inside' }) // Limitar dimensiones máximas
+      .jpeg({ quality: 70 }) // Ajustar calidad de la imagen
       .toBuffer()
       .then((buffer) => {
-        const base64Image = buffer.toString('base64');
-
-        // Agregar texto al PDF con nombre y apellido
-        doc.text(`Hello ${req.body.nombre} ${req.body.apellido}`, 10, 10);
+        // Agregar texto al PDF
+        doc.fontSize(16).text(`Hello ${req.body.nombre} ${req.body.apellido}`, 100, 100);
 
         // Agregar la imagen al PDF
-        doc.addImage(`data:image/jpeg;base64,${base64Image}`, 'JPEG', 10, 30, 150, 100);
+        doc.image(buffer, 100, 150, { width: 300 });
 
-        // Guardar el PDF en el sistema
-        doc.save(outputFilePath);
+        // Finalizar el documento
+        doc.end();
 
-        // Enviar el PDF al cliente
-        res.sendFile(outputFilePath);
+        // Enviar el archivo solo después de guardar
+        stream.on('finish', () => {
+          res.sendFile(outputFilePath);
+        });
+
+        stream.on('error', (err) => {
+          console.error('Error al escribir el PDF:', err);
+          res.status(500).json({ error: 'Error al generar el PDF.' });
+        });
       })
       .catch((err) => {
-        console.error('Error al procesar la imagen:', err);
+        console.error('Error al procesar la imagen:', err.message, err.stack);
         res.status(500).json({ error: 'Error al procesar la imagen.' });
       });
   }
