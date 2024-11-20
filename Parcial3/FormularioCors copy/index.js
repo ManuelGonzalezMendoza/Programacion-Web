@@ -38,8 +38,14 @@ app.use(upload.single('archivo')); // Middleware para procesar el archivo subido
 
 // Ruta para manejar el formulario
 app.post('/formulario', (req, res) => {
+  // Validar si se recibió un archivo
   if (!req.file) {
     return res.status(400).send('No se recibió ningún archivo.');
+  }
+
+  // Validar si los campos obligatorios están presentes
+  if (!req.body.nombre || !req.body.apellido) {
+    return res.status(400).send('Los campos nombre y apellido son obligatorios.');
   }
 
   const pdfDirectory = path.join(__dirname, 'archivosgen'); // Carpeta para guardar PDFs
@@ -62,8 +68,8 @@ app.post('/formulario', (req, res) => {
     .then((buffer) => {
       const base64Image = buffer.toString('base64');
 
-      // Agregar texto al PDF
-      doc.text(`Hello ${req.body.nombre}`, 10, 10);
+      // Agregar texto al PDF con nombre y apellido
+      doc.text(`Hello ${req.body.nombre} ${req.body.apellido}`, 10, 10);
 
       // Agregar la imagen al PDF
       doc.addImage(`data:image/jpeg;base64,${base64Image}`, 'JPEG', 10, 30, 150, 100);
