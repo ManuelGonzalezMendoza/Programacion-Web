@@ -48,32 +48,21 @@
 
         // Validar campo nombre
         if (nombre.value.trim() === "") {
-            nombre.classList.add("is-invalid");
+           
             esValido = false;
-        } else {
-            nombre.classList.remove("is-invalid");
-            nombre.classList.add("is-valid");
         }
-
         // Validar campo apellido
         if (apellido.value.trim() === "") {
-            apellido.classList.add("is-invalid");
+           
             esValido = false;
-        } else {
-            apellido.classList.remove("is-invalid");
-            apellido.classList.add("is-valid");
+        
         }
 
         // Validar campo archivo
-        const allowedTypes = ["image/jpeg", "image/png"];
-        const file = archivo.files[0];
-        if (!file || !allowedTypes.includes(file.type)) {
-            archivo.classList.add("is-invalid");
+        if (archivo.files.length === 0) {
+           
             esValido = false;
-            alert("Solo se permiten archivos de imagen (JPEG o PNG).");
-        } else {
-            archivo.classList.remove("is-invalid");
-            archivo.classList.add("is-valid");
+        
         }
 
         return esValido;
@@ -89,7 +78,7 @@
             })
             .then(response => {
                 if (!response.ok) {
-                    throw new Error("Solo se aceptan imágenes jpg o png.");
+                    throw new Error("Solo se aceptan imagenes jpg o png.");
                 }
                 return response.blob();
             })
@@ -112,3 +101,6 @@
 </script>
 </body>
 </html>
+
+
+
