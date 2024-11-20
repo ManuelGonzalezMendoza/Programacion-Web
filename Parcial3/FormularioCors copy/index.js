@@ -29,23 +29,38 @@ const storage = multer.diskStorage({
   },
 });
 
-const upload = multer({ storage: storage });
+// Validación del archivo con Multer
+const upload = multer({
+  storage: storage,
+  limits: { fileSize: 5 * 1024 * 1024 }, // Tamaño máximo: 5 MB
+  fileFilter: (req, file, cb) => {
+    // Validar que el archivo sea una imagen
+    const allowedTypes = ['image/jpeg', 'image/png'];
+    if (!allowedTypes.includes(file.mimetype)) {
+      return cb(new Error('Solo se permiten archivos de imagen (JPEG o PNG).'));
+    }
+    cb(null, true);
+  },
+});
 
 app.use(express.json({ limit: '10mb' }));
 app.use(express.urlencoded({ limit: '10mb', extended: true }));
 app.use(cors());
-app.use(upload.single('archivo')); // Middleware para procesar el archivo subido
 
 // Ruta para manejar el formulario
-app.post('/formulario', (req, res) => {
+app.post('/formulario', upload.single('archivo'), (req, res) => {
   // Validar si se recibió un archivo
   if (!req.file) {
-    return res.status(400).send('No se recibió ningún archivo.');
+    return res.status(400).json({ error: 'No se recibió ningún archivo.' });
   }
 
-  // Validar si los campos obligatorios están presentes
-  if (!req.body.nombre || !req.body.apellido) {
-    return res.status(400).send('Los campos nombre y apellido son obligatorios.');
+  // Validar si los campos obligatorios están presentes y no están vacíos
+  const { nombre, apellido } = req.body;
+  if (!nombre || nombre.trim() === '') {
+    return res.status(400).json({ error: 'El campo "nombre" es obligatorio.' });
+  }
+  if (!apellido || apellido.trim() === '') {
+    return res.status(400).json({ error: 'El campo "apellido" es obligatorio.' });
   }
 
   const pdfDirectory = path.join(__dirname, 'archivosgen'); // Carpeta para guardar PDFs
@@ -69,7 +84,7 @@ app.post('/formulario', (req, res) => {
       const base64Image = buffer.toString('base64');
 
       // Agregar texto al PDF con nombre y apellido
-      doc.text(`Hello ${req.body.nombre} ${req.body.apellido}`, 10, 10);
+      doc.text(`Hello ${nombre} ${apellido}`, 10, 10);
 
       // Agregar la imagen al PDF
       doc.addImage(`data:image/jpeg;base64,${base64Image}`, 'JPEG', 10, 30, 150, 100);
@@ -82,8 +97,18 @@ app.post('/formulario', (req, res) => {
     })
     .catch((err) => {
       console.error('Error al procesar la imagen:', err);
-      res.status(500).send('Error al procesar la imagen.');
+      res.status(500).json({ error: 'Error al procesar la imagen.' });
     });
+});
+
+// Manejar errores de multer
+app.use((err, req, res, next) => {
+  if (err instanceof multer.MulterError) {
+    return res.status(400).json({ error: `Error de archivo: ${err.message}` });
+  } else if (err) {
+    return res.status(400).json({ error: `Error: ${err.message}` });
+  }
+  next();
 });
 
 // Iniciar el servidor
