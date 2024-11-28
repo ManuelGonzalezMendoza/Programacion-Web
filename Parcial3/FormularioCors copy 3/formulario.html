@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Formulario con Búsqueda</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+<div class="container mt-5">
+    <h1 class="text-center">Formulario con Generación de PDF</h1>
+    <form id="miForm" method="POST" action="http://localhost:8083/formulario" enctype="multipart/form-data" novalidate>
+        <!-- Campo para buscar por ID -->
+        <div class="mb-3">
+            <label for="idUsuario" class="form-label">ID del Usuario</label>
+            <input type="number" class="form-control" id="idUsuario" placeholder="Ingrese el ID">
+        </div>
+        <button id="buscarBtn" type="button" class="btn btn-info mb-4">Buscar Usuario</button>
+
+        <!-- Campo Nombre -->
+        <div class="mb-3">
+            <label for="nombre" class="form-label">Nombre</label>
+            <input type="text" class="form-control" id="nombre" name="nombre" placeholder="">
+        </div>
+
+        <!-- Campo Apellido -->
+        <div class="mb-3">
+            <label for="apellido" class="form-label">Apellido</label>
+            <input type="text" class="form-control" id="apellido" name="apellido" placeholder="">
+        </div>
+        
+        <!-- Campo Archivo -->
+        <div class="mb-3">
+            <label for="arc" class="form-label">Archivo</label>
+            <input id="arc" type="file" class="form-control" name="archivo">
+        </div>
+
+        <!-- Botón para enviar el formulario -->
+        <button id="btnSubmit" type="submit" class="btn btn-primary">Generar PDF</button>
+    </form>
+</div>
+
+<script>
+    let usuarioBuscado = false;
+
+    // Buscar usuario por ID
+    document.getElementById('buscarBtn').addEventListener('click', () => {
+        const id = document.getElementById('idUsuario').value;
+
+        if (!id) {
+            alert('Por favor, ingrese un ID válido.');
+            return;
+        }
+
+        fetch(`http://localhost:8083/usuario/${id}`)
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error('Usuario no encontrado');
+                }
+                return response.json();
+            })
+            .then(data => {
+                usuarioBuscado = true; // Indicar que se buscó un usuario
+                document.getElementById('nombre').value = data.NOMBRE;
+                document.getElementById('apellido').value = data.APELLIDO;
+                document.getElementById('idUsuario').dataset.valid = id; // Guardar el ID buscado
+            })
+            .catch(err => {
+                usuarioBuscado = false;
+                alert(err.message);
+            });
+    });
+
+    // Manejo del envío del formulario para generar el PDF
+    document.getElementById('miForm').addEventListener('submit', (e) => {
+        e.preventDefault(); // Prevenir el comportamiento estándar
+
+        const formData = new FormData(document.getElementById('miForm'));
+
+        // Agregar el ID si se buscó un usuario
+        const idBuscado = document.getElementById('idUsuario').dataset.valid;
+        if (usuarioBuscado && idBuscado) {
+            formData.append('idUsuario', idBuscado);
+        }
+
+        fetch("http://localhost:8083/formulario", {
+            method: "POST",
+            body: formData,
+        })
+        .then(response => {
+            if (!response.ok) {
+                throw new Error('Error al generar el PDF');
+            }
+            return response.json();
+        })
+        .then(data => {
+            if (data.url) {
+                window.open(data.url, '_blank'); // Abrir el PDF en una nueva pestaña
+            } else {
+                alert('Error: No se recibió la URL del PDF.');
+            }
+        })
+        .catch(err => {
+            alert('Ocurrió un error: ' + err.message);
+        });
+    });
+</script>
+</body>
+</html>

@@ -3,114 +3,97 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Buscar y Generar PDF</title>
+  <title>Buscar Usuario y Generar PDF</title>
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
 </head>
 <body>
-  <div class="container mt-5">
-    <h1 class="text-center">Buscar Usuario y Generar PDF</h1>
-    <!-- Formulario para buscar y cargar datos -->
-    <form id="miForm" method="POST" enctype="multipart/form-data">
-      <!-- Campo ID -->
-      <div class="mb-3">
-        <label for="id" class="form-label">ID del Usuario</label>
-        <input type="number" class="form-control" id="id" name="id" required>
-        <div class="invalid-feedback">Por favor, ingrese el ID del usuario.</div>
-      </div>
-      
-      <!-- Campo Nombre -->
-      <div class="mb-3">
-        <label for="nombre" class="form-label">Nombre</label>
-        <input type="text" class="form-control" id="nombre" name="nombre" readonly>
-      </div>
-      
-      <!-- Campo Apellido -->
-      <div class="mb-3">
-        <label for="apellido" class="form-label">Apellido</label>
-        <input type="text" class="form-control" id="apellido" name="apellido" readonly>
-      </div>
+<div class="container mt-5">
+  <h1 class="text-center">Buscar Usuario y Generar PDF</h1>
+  <form id="formUsuario">
+    <div class="mb-3">
+      <label for="idUsuario" class="form-label">ID del Usuario</label>
+      <input type="number" class="form-control" id="idUsuario" placeholder="Ingrese el ID">
+    </div>
+    <div class="mb-3">
+      <label for="nombre" class="form-label">Nombre</label>
+      <input type="text" class="form-control" id="nombre" placeholder="Nombre" readonly>
+    </div>
+    <div class="mb-3">
+      <label for="apellido" class="form-label">Apellido</label>
+      <input type="text" class="form-control" id="apellido" placeholder="Apellido" readonly>
+    </div>
+    <div class="mb-3">
+      <label for="archivo" class="form-label">Cargar Imagen</label>
+      <input type="file" class="form-control" id="archivo">
+    </div>
+    <button type="button" id="btnBuscar" class="btn btn-primary">Buscar</button>
+    <button type="button" id="btnGenerarPDF" class="btn btn-secondary" disabled>Generar PDF</button>
+  </form>
+</div>
 
-      <!-- Campo para subir una imagen -->
-      <div class="mb-3">
-        <label for="archivo" class="form-label">Cargar Imagen</label>
-        <input id="archivo" type="file" class="form-control" name="archivo" required>
-        <div class="invalid-feedback">Por favor, cargue una imagen antes de generar el PDF.</div>
-      </div>
+<script>
+  document.getElementById('btnBuscar').addEventListener('click', () => {
+    const idUsuario = document.getElementById('idUsuario').value;
 
-      <!-- Botones -->
-      <div class="d-flex gap-3">
-        <button type="button" id="btnBuscar" class="btn btn-primary">Buscar</button>
-        <button type="button" id="btnPDF" class="btn btn-secondary" disabled>Generar PDF</button>
-      </div>
-    </form>
-  </div>
+    if (!idUsuario) {
+      alert('Por favor, ingrese un ID de usuario.');
+      return;
+    }
 
-  <script>
-    let imagenCargada = false; // Variable para verificar si se subió una imagen
-
-    // Botón para buscar el usuario
-    document.getElementById('btnBuscar').addEventListener('click', () => {
-      const id = document.getElementById('id').value;
-      if (!id) {
-        alert('Por favor, ingrese un ID.');
-        return;
-      }
-
-      fetch(`http://localhost:8083/buscar?id=${id}`, {
-        method: 'GET',
+    fetch(`http://localhost:8083/buscarUsuario/${idUsuario}`)
+      .then(response => {
+        if (!response.ok) {
+          throw new Error('Usuario no encontrado.');
+        }
+        return response.json();
       })
-        .then((response) => response.json())
-        .then((data) => {
-          if (data.error) {
-            alert(data.error);
-            document.getElementById('nombre').value = '';
-            document.getElementById('apellido').value = '';
-            document.getElementById('btnPDF').disabled = true;
-          } else {
-            document.getElementById('nombre').value = data.nombre;
-            document.getElementById('apellido').value = data.apellido;
-            document.getElementById('btnPDF').disabled = false; // Habilitar el botón PDF
-          }
-        })
-        .catch((err) => {
-          console.error(err);
-          alert('Error al buscar el usuario.');
-        });
-    });
-
-    // Botón para generar PDF
-    document.getElementById('btnPDF').addEventListener('click', () => {
-      const id = document.getElementById('id').value;
-      const archivoInput = document.getElementById('archivo');
-
-      if (!archivoInput.files.length) {
-        alert('Debe cargar una imagen antes de generar el PDF.');
-        return;
-      }
-
-      const formData = new FormData();
-      formData.append('id', id);
-      formData.append('archivo', archivoInput.files[0]);
-
-      fetch('http://localhost:8083/generar-pdf', {
-        method: 'POST',
-        body: formData,
+      .then(data => {
+        document.getElementById('nombre').value = data.NOMBRE;
+        document.getElementById('apellido').value = data.APELLIDO;
+        document.getElementById('btnGenerarPDF').disabled = false;
       })
-        .then((response) => {
-          if (!response.ok) {
-            throw new Error('Error al generar el PDF.');
-          }
-          return response.blob();
-        })
-        .then((pdfBlob) => {
-          const pdfURL = URL.createObjectURL(pdfBlob);
-          window.open(pdfURL);
-        })
-        .catch((err) => {
-          console.error(err);
-          alert(err.message);
-        });
-    });
-  </script>
+      .catch(err => {
+        alert(err.message);
+        document.getElementById('nombre').value = '';
+        document.getElementById('apellido').value = '';
+        document.getElementById('btnGenerarPDF').disabled = true;
+      });
+  });
+
+  document.getElementById('btnGenerarPDF').addEventListener('click', () => {
+    const formData = new FormData();
+    const archivo = document.getElementById('archivo').files[0];
+    const nombre = document.getElementById('nombre').value;
+    const apellido = document.getElementById('apellido').value;
+
+    if (!archivo) {
+      alert('Por favor, cargue una imagen.');
+      return;
+    }
+
+    formData.append('nombre', nombre);
+    formData.append('apellido', apellido);
+    formData.append('archivo', archivo);
+
+    fetch('http://localhost:8083/generarPDF', {
+      method: 'POST',
+      body: formData
+    })
+      .then(response => {
+        if (!response.ok) {
+          throw new Error('Error al generar el PDF.');
+        }
+        return response.blob();
+      })
+      .then(blob => {
+        const url = window.URL.createObjectURL(blob);
+        const a = document.createElement('a');
+        a.href = url;
+        a.download = 'usuario.pdf';
+        a.click();
+      })
+      .catch(err => alert(err.message));
+  });
+</script>
 </body>
 </html>
