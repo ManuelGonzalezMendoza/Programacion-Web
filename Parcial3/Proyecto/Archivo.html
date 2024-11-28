@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Formulario de Productos</title>
+    <link rel="stylesheet" href="Diseño.css">  <!-- Enlazamos el archivo CSS -->
+</head>
+<body>
+    <div class="container">
+        <h1>Formulario de Productos</h1>
+
+        <!-- Formulario de búsqueda de producto -->
+        <div class="search-form">
+            <label for="productName">Nombre del producto:</label>
+            <input type="text" id="productName" placeholder="Buscar producto...">
+            <button id="searchBtn">Buscar</button>
+        </div>
+
+        <!-- Cuadro con la información del producto -->
+        <div id="productInfo" class="product-info" style="display: none;">
+            <h2>Detalles del Producto</h2>
+            <p><strong>Nombre:</strong> <span id="productDisplayName"></span></p>
+            <p><strong>Precio (Walmart):</strong> $<span id="productPrice"></span></p>
+            <p><strong>Código:</strong> <span id="productCode"></span></p>
+            
+            <label for="quantity">Cantidad:</label>
+            <input type="number" id="quantity" min="1" value="1">
+            <label for="samsPrice">Precio Sams:</label>
+            <input type="number" id="samsPrice" placeholder="Precio Sams">
+            <button id="addBtn">Agregar</button>
+        </div>
+
+        <!-- Tabla de productos agregados -->
+        <h2>Productos en el carrito</h2>
+        <table id="productList">
+            <thead>
+                <tr>
+                    <th>Nombre</th>
+                    <th>Precio (Walmart)</th>
+                    <th>Código</th>
+                    <th>Cantidad</th>
+                    <th>Total</th>
+                    <th>Precio Sams</th>
+                    <th>Comparación</th>
+                    <th>Acción</th>
+                </tr>
+            </thead>
+            <tbody>
+                <!-- Aquí se agregarán los productos -->
+            </tbody>
+        </table>
+    </div>
+
+    <script src="script.js"></script> <!-- Enlazamos el archivo JS -->
+</body>
+</html>

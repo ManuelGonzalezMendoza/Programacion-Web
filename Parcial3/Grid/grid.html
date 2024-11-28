@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Lista de Usuarios</title>
+  <!-- CSS de Grid.js -->
+  <link href="https://cdn.jsdelivr.net/npm/gridjs/dist/theme/mermaid.min.css" rel="stylesheet">
+  <!-- JS de Grid.js -->
+  <script src="https://cdn.jsdelivr.net/npm/gridjs/dist/gridjs.umd.js"></script>
+</head>
+<body>
+  <h1>Lista de Usuarios</h1>
+  <!-- Contenedor para la tabla -->
+  <div id="usuarios-table"></div>
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      // Inicializar la tabla Grid.js
+      const grid = new gridjs.Grid({
+        columns: ['ID', 'Nombre', 'Apellido'], // Columnas que deseas mostrar
+        server: {
+          url: 'http://localhost:8083/usuarios', // URL de tu API backend
+          then: data => data.map(usuario => [
+            usuario.ID_USUARIO,
+            usuario.NOMBRE,
+            usuario.APELLIDO
+          ])
+        },
+        pagination: false, // Habilitar paginación
+        search: false,     // Habilitar búsqueda
+        sort: true        // Habilitar ordenamiento
+      });
+
+      // Renderizar la tabla en el contenedor
+      grid.render(document.getElementById('usuarios-table'));
+    });
+  </script>
+</body>
+</html>

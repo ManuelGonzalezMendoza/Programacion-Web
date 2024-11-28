@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Comparación de Precios de Productos de Electrónica</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      background-color: #f4f4f4;
+    }
+    .container {
+      width: 80%;
+      margin: 0 auto;
+      padding: 20px;
+      background-color: white;
+    }
+    h1 {
+      text-align: center;
+      color: #333;
+    }
+    .form-container, .product-details {
+      margin-bottom: 20px;
+      padding: 20px;
+      background-color: #e9ecef;
+      border-radius: 8px;
+    }
+    input, button {
+      padding: 10px;
+      margin: 10px 0;
+      width: 100%;
+      box-sizing: border-box;
+      border-radius: 4px;
+      border: 1px solid #ccc;
+    }
+    button {
+      cursor: pointer;
+      background-color: #007bff;
+      color: white;
+    }
+    button:hover {
+      background-color: #0056b3;
+    }
+    .autocomplete-suggestions {
+      background-color: white;
+      border: 1px solid #ccc;
+      max-height: 150px;
+      overflow-y: auto;
+      position: absolute;
+      width: calc(100% - 20px);
+      box-sizing: border-box;
+      z-index: 10;
+    }
+    .autocomplete-suggestion {
+      padding: 10px;
+      cursor: pointer;
+    }
+    .autocomplete-suggestion:hover {
+      background-color: #f0f0f0;
+    }
+    table {
+      width: 100%;
+      margin-top: 20px;
+      border-collapse: collapse;
+    }
+    table, th, td {
+      border: 1px solid #ccc;
+    }
+    th, td {
+      padding: 12px;
+      text-align: center;
+    }
+    .empty {
+      text-align: center;
+      font-size: 18px;
+      color: #888;
+    }
+    .total-row {
+      font-weight: bold;
+      background-color: #f0f0f0;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Comparación de Precios de Productos de Electrónica</h1>
+
+    <!-- Formulario de Búsqueda -->
+    <div class="form-container">
+      <h3>Buscar Producto</h3>
+      <input type="text" id="productName" placeholder="Ingresa el nombre del producto (Ej. Smartphone)" oninput="showSuggestions()">
+      <div id="autocompleteSuggestions" class="autocomplete-suggestions" style="display: none;"></div>
+      <button onclick="searchProduct()">Buscar</button>
+    </div>
+
+    <!-- Detalles del Producto -->
+    <div class="product-details" id="productDetails" style="display: none;">
+      <h3>Detalles del Producto</h3>
+      <p><strong>Nombre:</strong> <span id="productDisplayName"></span></p>
+      <p><strong>Precio (Walmart):</strong> $<span id="productDisplayPrice"></span></p>
+      <p><strong>Código:</strong> <span id="productDisplayCode"></span></p>
+      <label for="quantity">Cantidad:</label>
+      <input type="number" id="quantity" value="1" min="1" oninput="updateTotalPrice()">
+      <p><strong>Total:</strong> $<span id="totalPrice"></span></p>
+      <button onclick="addToCart()">Agregar al Carrito</button>
+    </div>
+
+    <!-- Lista de Productos en la Tabla -->
+    <div>
+      <h3>Productos Agregados</h3>
+      <table id="cartTable">
+        <thead>
+          <tr>
+            <th>Producto</th>
+            <th>Cantidad</th>
+            <th>Precio (Walmart)</th>
+            <th>Total (Walmart)</th>
+            <th>Cantidad (Sam's)</th>
+            <th>Precio (Sam's)</th>
+            <th>Total (Sam's)</th>
+            <th>Acción</th>
+          </tr>
+        </thead>
+        <tbody id="cartTableBody">
+          <tr class="empty" id="emptyCartMessage">
+            <td colspan="8">No has agregado productos aún.</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <script>
+    const products = [
+      { name: "Smartphone Samsung Galaxy S23", price: 799, code: "S23", category: "electrónica" },
+      { name: "Laptop Dell XPS 13", price: 999, code: "XPS13", category: "electrónica" },
+      { name: "Auriculares Sony WH-1000XM5", price: 350, code: "WH1000XM5", category: "electrónica" },
+      { name: "Televisor LG OLED 55\"", price: 1500, code: "OLED55", category: "electrónica" },
+      { name: "Smartwatch Apple Watch Series 8", price: 399, code: "AW8", category: "electrónica" },
+      { name: "Tableta iPad Pro 11\"", price: 799, code: "IPadPro11", category: "electrónica" }
+    ];
+
+    let cart = [];
+    let currentSuggestions = [];
+
+    const samsPriceComparison = {
+      "Smartphone Samsung Galaxy S23": 780,
+      "Laptop Dell XPS 13": 975,
+      "Auriculares Sony WH-1000XM5": 340,
+      "Televisor LG OLED 55\"": 1450,
+      "Smartwatch Apple Watch Series 8": 385,
+      "Tableta iPad Pro 11\"": 780
+    };
+
+    function showSuggestions() {
+      const input = document.getElementById('productName').value.toLowerCase();
+      const suggestionsContainer = document.getElementById('autocompleteSuggestions');
+      suggestionsContainer.innerHTML = '';
+
+      if (!input) {
+        suggestionsContainer.style.display = 'none';
+        return;
+      }
+
+      currentSuggestions = products.filter(product => product.name.toLowerCase().includes(input));
+
+      if (currentSuggestions.length > 0) {
+        suggestionsContainer.style.display = 'block';
+
+        currentSuggestions.forEach(product => {
+          const suggestionItem = document.createElement('div');
+          suggestionItem.classList.add('autocomplete-suggestion');
+          suggestionItem.textContent = product.name;
+          suggestionItem.onclick = () => selectSuggestion(product);
+          suggestionsContainer.appendChild(suggestionItem);
+        });
+      } else {
+        suggestionsContainer.style.display = 'none';
+      }
+    }
+
+    function selectSuggestion(product) {
+      document.getElementById('productName').value = product.name;
+      document.getElementById('autocompleteSuggestions').style.display = 'none';
+    }
+
+    function searchProduct() {
+      const productName = document.getElementById('productName').value.toLowerCase();
+      const product = products.find(p => p.name.toLowerCase() === productName);
+
+      if (product) {
+        document.getElementById('productDisplayName').textContent = product.name;
+        document.getElementById('productDisplayPrice').textContent = product.price;
+        document.getElementById('productDisplayCode').textContent = product.code;
+        document.getElementById('productDetails').style.display = 'block';
+
+        updateTotalPrice();
+      } else {
+        alert('Producto no encontrado');
+        document.getElementById('productDetails').style.display = 'none';
+      }
+    }
+
+    function updateTotalPrice() {
+      const productPrice = parseFloat(document.getElementById('productDisplayPrice').textContent);
+      const quantity = parseInt(document.getElementById('quantity').value);
+      const total = productPrice * quantity;
+
+      document.getElementById('totalPrice').textContent = total.toFixed(2);
+    }
+
+    function addToCart() {
+      const productName = document.getElementById('productDisplayName').textContent;
+      const productPrice = parseFloat(document.getElementById('productDisplayPrice').textContent);
+      const quantity = parseInt(document.getElementById('quantity').value);
+
+      const samsPrice = samsPriceComparison[productName] || productPrice;
+
+      // Verificar si el producto ya está en el carrito
+      const existingProductIndex = cart.findIndex(item => item.name === productName);
+      if (existingProductIndex !== -1) {
+        // Actualizar la cantidad y el total
+        cart[existingProductIndex].quantity += quantity;
+        cart[existingProductIndex].totalWalmart = cart[existingProductIndex].price * cart[existingProductIndex].quantity;
+        cart[existingProductIndex].totalSams = cart[existingProductIndex].samsPrice * cart[existingProductIndex].quantity;
+      } else {
+        const cartItem = {
+          name: productName,
+          price: productPrice,
+          quantity: quantity,
+          totalWalmart: productPrice * quantity,
+          samsPrice: samsPrice,
+          totalSams: samsPrice * quantity
+        };
+
+        cart.push(cartItem);
+      }
+
+      updateCartTable();
+    }
+
+    function removeFromCart(index) {
+      cart.splice(index, 1);
+      updateCartTable();
+    }
+
+    function updateCartTable() {
+      const cartTableBody = document.getElementById('cartTableBody');
+      const emptyCartMessage = document.getElementById('emptyCartMessage');
+
+      cartTableBody.innerHTML = '';
+
+      if (cart.length === 0) {
+        cartTableBody.appendChild(emptyCartMessage);
+        return;
+      }
+
+      let totalWalmart = 0;
+      let totalSams = 0;
+
+      cart.forEach((item, index) => {
+        const row = document.createElement('tr');
+        row.innerHTML = `
+          <td>${item.name}</td>
+          <td>${item.quantity}</td>
+          <td>$${item.price}</td>
+          <td>$${item.totalWalmart}</td>
+          <td>${item.quantity}</td>
+          <td>$${item.samsPrice}</td>
+          <td>$${item.totalSams}</td>
+          <td><button onclick="removeFromCart(${index})">Eliminar</button></td>
+        `;
+        cartTableBody.appendChild(row);
+
+        totalWalmart += item.totalWalmart;
+        totalSams += item.totalSams;
+      });
+
+      const totalRow = document.createElement('tr');
+      totalRow.classList.add('total-row');
+      totalRow.innerHTML = `
+        <td colspan="3">Total Final Walmart</td>
+        <td>$${totalWalmart.toFixed(2)}</td>
+        <td colspan="2">Total Final Sam's</td>
+        <td>$${totalSams.toFixed(2)}</td>
+      `;
+      cartTableBody.appendChild(totalRow);
+    }
+  </script>
+</body>
+</html>
